@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"	
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<h:head>
+		<title>Biblioteca</title>
+		<f:viewParam name="book" value="#{bookEdit.book}" />
+		<f:event listener="#{index.init()}" type="preRenderView" />	 
+		<!-- 
+		-->
+	</h:head>	
+	
+	<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
+		<h1 align = "center" style="background-color:#767576;"> Biblioteca</h1>
+		
+		<p align = "center" style="background-color:#767576;">
+			
+			<h:link outcome="book_edit.xhtml">
+				<img src = "img/book.png"   alt = "">Adicionar</img> 
+			</h:link>
+			
+			<h:link outcome="search.xhtml" >
+				<img src = "img/search.png" alt = "">Buscar/Editar/Remover</img> 
+			</h:link>
+			
+			<h:link outcome="selecionarItem.xhtml" >
+				<img src = "img/search.png" alt = "">Selecionar ItemBiblioteca</img>
+			</h:link>
+			
+		</p>
+		<h:form id="formEdit" style="background-color:#767576;">
+					<h:commandButton action="#{bookEdit.povoar()}" value="Povoar"/>	
+		</h:form>	
+		
+	</h:body>
+</html>

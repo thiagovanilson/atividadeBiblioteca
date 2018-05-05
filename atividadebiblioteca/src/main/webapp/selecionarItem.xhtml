@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"	
+	xmlns:p="http://primefaces.org/ui"		
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<f:metadata>
+		 <f:event listener="#{bookEdit.init()}" type="preRenderView" />
+		 <f:viewParam name="book" value="#{bookEdit.book}" />
+	
+	</f:metadata>
+	<h:head>
+		<title>Biblioteca - Selecionar Item</title>
+		<!-- 
+		<f:viewParam name="book" value="#{bookEdit.book}" />
+		<f:event listener="#{index.init()}" type="preRenderView" />	 
+		-->
+	</h:head>	
+	
+	<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
+		<div align = "center">
+			<p:outputLabel>
+				<h1 align = "center" style="background-color:#767576;"> Selecionar Item</h1>
+			</p:outputLabel>
+			
+			<h:form id="formFiltro" >
+				<p align = "center" style="background-color:#767576;">
+					<p:selectOneMenu  id = "name" value="#{index.book}">
+						<f:selectItems  value="#{index.books}" var="g" itemLabel="#{g.name}" itemValue="#{g.name}" />						
+					</p:selectOneMenu>
+					
+					<p:button outcome="index.xhtml" value="Menu principal" />
+					<p:commandButton   value="Ok" type="submit" update="@all"/>
+				</p>
+			</h:form>
+		</div>
+		
+		<br />
+		
+		<p id="mes" align = "center" style="background-color:#767576;">
+			<p:outputLabel value="#{index.description()}"  /> 
+		</p>
+		
+	</h:body>
+</html>

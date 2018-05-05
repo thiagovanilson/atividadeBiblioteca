@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<f:metadata>
+		 <f:event listener="#{bookEdit.init()}" type="preRenderView" />
+		 <f:viewParam name="book" value="#{bookEdit.book}" />
+		<!-- 
+		 <f:viewAction action="#{bookEdit.getById()}" />	 
+		<f:viewParam name="book" value="#{bookEdit.book}" />
+		 -->
+		
+	</f:metadata>
+	
+	<h:head>
+		<title>Edição de Livro</title>
+	</h:head>
+	
+	<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
+		
+		<h1 align = "center" style="background-color:#767576;">Edição e registro de livros</h1>
+		
+		<div align = "center">
+			<p>		
+				<h:messages style="color:#aa0000; "/>
+			</p>
+			
+			<h:form id="formEdit" style="background-color:#767576;">
+				<h:panelGrid columns="2">
+				
+					
+					<h:outputLabel for="bookIsbn" value="ISBN: " />
+					<h:inputText id="bookIsbn"  label="isbn" value="#{bookEdit.book.isbn}" required="true"  />
+						
+					
+					<h:outputLabel for="bookName" value="Nome do livro: "  />
+					<h:inputText id="bookName"  label="Nome do Livro" required="true" value="#{bookEdit.book.name}" />
+				
+					
+					<h:outputLabel for="bookEditora" value="Editora: " />
+					<h:inputText id="bookEditora" label="Editora" value="#{bookEdit.book.edition}" required="true"/>
+					
+					<h:outputLabel for="bookPages" value="Quantidade de paginas: " />
+					<h:inputText id="bookPages" label="QuantiddadeDePaginas" value="#{bookEdit.book.qtdPages}" required="true" />
+					
+					<h:outputLabel for="bookAssunto" value="Assunto: " />
+					<h:inputText id="bookAssunto"  label="Assunto" value="#{bookEdit.book.subject}" required="true"/>
+					
+					<h:outputLabel for="bookDate" value="Data de publicação: " required="true"/>
+					<h:inputText id="bookDate"  label="Data de publicacao" value="#{bookEdit.book.date}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:inputText>
+					
+					<h:outputLabel  for="bookDescription" value="Descrição: " />
+					<h:inputTextarea id="bookDescription"  label="Descricao" required="true" rows="5" value="#{bookEdit.book.description}" />
+					
+					<h:outputLabel for="type" value="Tipo de publicação"  />				
+					<h:selectOneMenu id="type"  value="#{bookEdit.book.type}">
+						  <f:selectItem itemLabel="Livro"          itemValue="Livro"/>
+						  <f:selectItem itemLabel="Livro de bolso" itemValue="Livro de bolso"/>
+						  <f:selectItem itemLabel="Capa Dura"      itemValue="Capa dura"/>
+						  <f:selectItem itemLabel="Ebook"          itemValue="Ebook"/>
+						  <f:selectItem itemLabel="Revista"        itemValue="Revista"/>
+						  <f:selectItem itemLabel="Periodico"      itemValue="Periodico"/>
+					</h:selectOneMenu>
+					
+					<h:commandButton action="#{bookEdit.saveBook}" value="Salvar" />
+					<h:button outcome="index.xhtml" value="Menu principal" />
+					<!-- 
+					 -->			
+				
+			
+				</h:panelGrid>
+			</h:form>
+		</div>
+		
+	</h:body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<f:metadata>
+		<f:viewParam name="book2" value="#{bookDelete.book}" />	
+	</f:metadata>
+	
+	<h:head>
+		<title>Deletar Livro</title>
+	</h:head>
+	
+	<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
+			<h1 align = "center" style="background-color:#767576;"> Confirme a exclusão do livro</h1>
+			<p />
+			<div align = "center" style="background-color:#767576;">
+				
+			<h:form id="formDelete">
+			<h:outputText
+				value="Voce confirma excluir o livro #{bookDelete.book.name} Isbn #{bookDelete.book.isbn}?      " />
+			<h:commandButton action="#{bookDelete.delete}" value="Sim, excluir" />
+			<h:commandButton action="#{bookDelete.cancel}" value="Cancelar" />
+		</h:form>
+			</div>
+	</h:body>
+</html>
