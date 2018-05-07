@@ -28,16 +28,16 @@
 						<f:selectItems  value="#{index.books}" var="g" itemLabel="#{g.name}" itemValue="#{g.name}" />						
 					</p:selectOneMenu>
 					
-					<p:button outcome="index.xhtml" value="Menu principal" />
-					<p:commandButton   value="Ok" type="submit" update="@all"/>
 				</p>
+					<p:button outcome="index.xhtml" value="Menu principal" />
+					<p:commandButton   value="Ok" type="submit" update=":mes"/>
 			</h:form>
 		</div>
 		
 		<br />
 		
-		<p id="mes" align = "center" style="background-color:#767576;">
-			<p:outputLabel value="#{index.description()}"  /> 
+		<p  align = "center" style="background-color:#767576;">
+			<p:outputLabel id="mes" value="#{index.description()}"  /> 
 		</p>
 		
 	</h:body>

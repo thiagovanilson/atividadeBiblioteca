@@ -42,6 +42,7 @@ public class Index extends AbstractBean {
 		}
 		return "";
 	}
+	
 	public String filtrar() {
 		try {
 			books = bookService.findBy(getBookFilter());

@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:p="http://primefaces.org/ui"		
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	class="fa fa-umbrella Fs100 Red">
 <h:head>
 	<title>Lista de livros</title>
 </h:head>
 
 
 <h:body style="background: url('img/back.jpg'); background-color:#767576; ">
-		<h1 align = "center" style="background-color:#767576;"> Buscar Livro</h1>
+	<h1 align = "center" style="background-color:#767576;"> Buscar Livro</h1>
 		
 
 	<h:messages />
@@ -17,7 +19,7 @@
 		<p align = "center" style="background-color:#767576;">
 			
 		<h:form id="formFiltro" >
-			<h:panelGrid columns="2">
+			<p:panelGrid columns="2" >
 				<f:facet name="caption">
 					<h:outputText value=""/>
 				</f:facet>		
@@ -25,98 +27,115 @@
 					<h:outputText value="Filtros"/>
 				</f:facet>
 	
-				<h:outputLabel value="Isbn (dispença fltros): " for="isbnFiltro" />
-				<h:inputText id="isbnFiltro" value="#{index.bookFilter.isbn}" label="Isbn do livro" style="width:250px" />
+				<p:outputLabel value="Isbn (dispença fltros): " for="isbnFiltro" />
+				<p:inputText id="isbnFiltro" value="#{index.bookFilter.isbn}" label="Isbn do livro" style="width:250px" />
 	
-				<h:outputLabel value="Nome: " for="nameFiltro" />
-				<h:inputText id="nameFiltro" value="#{index.bookFilter.name}" label="Nome do livro" style="width:350px" />
+				<p:outputLabel value="Nome: " for="nameFiltro" />
+				<p:inputText id="nameFiltro" value="#{index.bookFilter.name}" label="Nome do livro" style="width:350px" />
 	
-				<h:outputLabel value="Editora: " for="EditionFiltro" />
-				<h:inputText id="EditionFiltro" value="#{index.bookFilter.edition}" label="edition " style="width:350px" />
+				<p:outputLabel value="Editora: " for="EditionFiltro" />
+				<p:inputText id="EditionFiltro" value="#{index.bookFilter.edition}" label="edition " style="width:350px" />
 	
-				<h:outputLabel value="Publicado a partir de: " for="beginFiltro" />
-				<h:inputText id="beginFiltro" value="#{index.bookFilter.rangeBegin}" label="beginPages " converter="javax.faces.DateTime" style="width:100px" />
+				<p:outputLabel value="Publicado a partir de: " for="beginFiltro" />
+				<p:inputText id="beginFiltro" value="#{index.bookFilter.rangeBegin}" label="beginPages " converter="javax.faces.DateTime" style="width:100px" />
 	
-				<h:outputLabel value="Publicado até: " for="endFiltro" />
-				<h:inputText id="endFiltro" value="#{index.bookFilter.rangeEnd}" label="endPages "  converter="javax.faces.DateTime" style="width:100px" />
+				<p:outputLabel value="Publicado até: " for="endFiltro" />
+				<p:inputText id="endFiltro" value="#{index.bookFilter.rangeEnd}" label="endPages "  converter="javax.faces.DateTime" style="width:100px" />
 	
-				<h:outputLabel value="Paginas acima de: " for="upPagesFiltro" />
-				<h:inputText id="upPagesFiltro" value="#{index.bookFilter.upPages}" label="upPages " style="width:50px" />
+				<p:outputLabel value="Paginas acima de: " for="upPagesFiltro" />
+				<p:inputText id="upPagesFiltro" value="#{index.bookFilter.upPages}" label="upPages " style="width:50px" />
 	
-				<h:outputLabel value="Paginas até: " for="downPagesFiltro" />
-				<h:inputText id="downPagesFiltro" value="#{index.bookFilter.downPages}" label="downPages " style="width:50px" />
+				<p:outputLabel value="Paginas até: " for="downPagesFiltro" />
+				<p:inputText id="downPagesFiltro" value="#{index.bookFilter.downPages}" label="downPages " style="width:50px" />
 	
 	
-				<h:outputLabel for="group" value="Tipo de publicação: " />
-				<h:selectOneMenu id="group" value="#{index.bookFilter.type}" label="Tipo da publicação">
+				<p:outputLabel for="group" value="Tipo de publicação: " />
+				<p:selectOneMenu id="group" value="#{index.bookFilter.type}" label="Tipo da publicação">
 					<f:selectItem  itemLabel="Todos" itemValue="#{null}" />
 					<f:selectItems value="#{bookEdit.book.types}" var="g" itemLabel="#{g}" itemValue="#{g}" />
-				</h:selectOneMenu>
+				</p:selectOneMenu>
 				
 				<h:panelGrid columns="2">
-					<h:commandButton id="btnFiltrarBotao" value="Buscar" action="#{index.filtrar()}" />
-					<h:commandButton id="btnLimparBotao" value="Limpar" action="#{index.limpar()}" />
+					<p:commandButton id="btnFiltrarBotao" value="Buscar" action="#{index.filtrar()}" update=":dataTableLivros"/>
+					<p:commandButton id="btnLimparBotao" value="Limpar" action="#{index.limpar()}" update="@all"/>
 				</h:panelGrid>
-				<h:commandButton id="btnMenuBotao" value="Menu" action="index.xhtml" />
+				<p:commandButton id="btnMenuBotao" value="Menu" action="index.xhtml" />
 				
-			</h:panelGrid>
+			</p:panelGrid>
 		</h:form>
 		</p>
-		<hr />
-		<H3>Livros encontrados</H3>
-		<h:dataTable id="dataTableLivros" border="1" var="book" value="#{index.books}">
-			<h:column>
-				<f:facet name="header">Isbn</f:facet>
-				<h:outputText value="#{book.isbn}" />
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Titulo</f:facet>
-				<h:outputText value="#{book.name}" />
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Edição</f:facet>
-				<h:outputText value="#{book.edition}" />
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Quantidade de paginas</f:facet>
-				<h:outputText value="#{book.qtdPages}" />
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Tipo</f:facet>
-				<h:outputText value="#{book.type}" />
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Data de publicação</f:facet>
-				<h:outputText value="#{book.date}" />
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Assunto</f:facet>
-				<h:outputText value="#{book.subject}" />
-			</h:column>
 		
-			<h:column>
-				<f:facet name="header">Operações</f:facet>
-				<h:link outcome="book_edit.xhtml" value="">
-				<img src = "img/create.png" alt = "" /> Editar livro
-					<f:param name="book" value="#{book.isbn}" />
-				</h:link>
+		<hr />
+		
+		<p:fieldset legend="Livros encontrados">
+			<p:dataTable id="dataTableLivros" var="book" value="#{index.books}">
+				<p:column>
+					<f:facet name="header">Isbn</f:facet>
+					<h:outputText value="#{book.isbn}" />
+				</p:column>
 				
-				<h:outputText value=" "/>
-				<h:link outcome="book_delete.xhtml" value="" >
-					<img src = "img/delete.png" alt = "" /> Deletar livro
-					<f:param name="book2" value="#{book.isbn}" />
-				</h:link>
+				<p:column>
+					<f:facet name="header">Titulo</f:facet>
+					<h:outputText value="#{book.name}" />
+				</p:column>
 				
-			</h:column>
-		</h:dataTable>
+				<p:column>
+					<f:facet name="header">Edição</f:facet>
+					<h:outputText value="#{book.edition}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Quantidade de paginas</f:facet>
+					<h:outputText value="#{book.qtdPages}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Tipo</f:facet>
+					<h:outputText value="#{book.type}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Data de publicação</f:facet>
+					<h:outputText value="#{book.date}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Assunto</f:facet>
+					<h:outputText value="#{book.subject}" />
+				</p:column>
+			
+				<p:column>
+					
+					<f:facet name="header">Operações</f:facet>
+					
+					<p:commandButton id="deleteBook" icon="ui delete" action="#{search.deleteBook(book)}" update="@all" value="Excluir">
+						<p:confirm header="Confirmação!" message="Continuar com a remoção do livro '#{book.title}' ?" icon="ui-icon-alert" />
+					</p:commandButton>		
+							
+					<p:button outcome="book_edit.xhtml" value="Editar publicação">
+						<f:param name="book" value="#{book.isbn}" />
+					</p:button>
+					
+					
+					<!-- 
+					<p:link outcome="book_delete.xhtml" value="" >
+						<img src = "img/delete.png" alt = "" /> Deletar livro
+						<f:param name="book2" value="#{book.isbn}" />
+					</p:link>
+					<p:button id="editUserPassword" outcome="user_edit_password.xhtml" value="..." icon="fa fa-edit">
+							<f:param name="user" value="#{user.id}" />
+						</p:button>
+					 -->
+				
+				</p:column>
+			</p:dataTable>
+		</p:fieldset>
 		<br />
 	</div>
-
+		
+		<p:confirmDialog id="confirmDialog" global="true" showEffect="fade" hideEffect="fade">
+	        <p:commandButton id="confirmYes" value="Sim" styleClass="ui-confirmdialog-yes" icon="fa fa-remove" />
+	        <p:commandButton id="confirmNo" value="Cancelar" styleClass="ui-confirmdialog-no" icon="fa fa-ban" />
+	    </p:confirmDialog>
 </h:body>
 </html>

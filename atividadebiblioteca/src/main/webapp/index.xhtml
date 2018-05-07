@@ -13,23 +13,16 @@
 	</h:head>	
 	
 	<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
-		<h1 align = "center" style="background-color:#767576;"> Biblioteca</h1>
+		<h1 align = "center" style="background-color:#767576;">Biblioteca</h1>
 		
 		<p align = "center" style="background-color:#767576;">
 			
-			<h:link outcome="book_edit.xhtml">
-				<img src = "img/book.png"   alt = "">Adicionar</img> 
-			</h:link>
-			
-			<h:link outcome="search.xhtml" >
-				<img src = "img/search.png" alt = "">Buscar/Editar/Remover</img> 
-			</h:link>
-			
-			<h:link outcome="selecionarItem.xhtml" >
-				<img src = "img/search.png" alt = "">Selecionar ItemBiblioteca</img>
-			</h:link>
+			<p:button outcome="book_edit.xhtml"       value="Adicionar"                 />
+			<p:button outcome="search.xhtml"          value="Buscar/Editar/Remover"     />
+			<p:button outcome="selecionarItem.xhtml"  value="Selecionar ItemBiblioteca" />		
 			
 		</p>
+		
 		<h:form id="formEdit" style="background-color:#767576;">
 					<h:commandButton action="#{bookEdit.povoar()}" value="Povoar"/>	
 		</h:form>	
