@@ -75,8 +75,10 @@ public class BookEdit extends AbstractBean {
 			bookService.save(book);
 		} catch (ServiceDacException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			reportarMensagemDeErro(e.getMessage());
 		}
+		reportarMensagemDeSucesso("Publicação salva!");
+
 		return "index.xhtml";
 	}
 /*

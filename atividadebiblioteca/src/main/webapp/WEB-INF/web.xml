@@ -10,8 +10,8 @@
 	</context-param>
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>omega</param-value>
-		<!-- default: -->
+		<param-value>aristo</param-value>
+		<!-- default: omega-->
 		<!-- <param-value>aristo</param-value> -->
 	</context-param>
 	<servlet>

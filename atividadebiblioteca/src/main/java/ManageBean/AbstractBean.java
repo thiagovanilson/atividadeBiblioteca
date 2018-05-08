@@ -26,10 +26,11 @@ public abstract class AbstractBean implements Serializable {
 	}
 
 	private void reportarMensagem(boolean isErro, String detalhe) {
-		String tipo = "Success!";
+		String tipo = "Sucesso!";
 		Severity severity = FacesMessage.SEVERITY_INFO;
+		
 		if (isErro) {
-			tipo = "Error!";
+			tipo = "Eror!";
 			severity = FacesMessage.SEVERITY_ERROR;
 			FacesContext.getCurrentInstance().validationFailed();
 		}
