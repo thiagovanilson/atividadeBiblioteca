@@ -3,14 +3,14 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"	
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
 	<f:metadata>
 		 <f:event listener="#{bookEdit.init()}" type="preRenderView" />
 		 <f:viewParam name="book" value="#{bookEdit.book}" />
 		<!-- 
 		 <f:viewAction action="#{bookEdit.getById()}" />	 
 		<f:viewParam name="book" value="#{bookEdit.book}" />
-		 -->
-		
+		 -->		
 	</f:metadata>
 	
 	<h:head>
@@ -19,14 +19,12 @@
 	
 	<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
 		<p:growl id="idMessages" showDetail="true" autoUpdate="true" severity="info" />
+		<p:messages id="idMessagesErrors" showDetail="true" closable="true" severity="error" autoUpdate="true" />
 		
 		<h1 align = "center" style="background-color:#767576;">Edição e registro de livros</h1>
 		
 		<div align = "center">
-			<p>		
-				<h:messages style="color:#aa0000; "/>
-			</p>
-			
+						
 			<h:form id="formEdit" style="background-color:#767576;">
 				<h:panelGrid columns="2">				
 					
@@ -68,8 +66,7 @@
 					<p:commandButton type="submit" action="#{bookEdit.saveBook}" value="Salvar" />
 					<p:button outcome="index.xhtml" value="Menu principal" />
 					<!-- 
-					 -->			
-				
+					 -->						
 			
 				</h:panelGrid>
 			</h:form>
