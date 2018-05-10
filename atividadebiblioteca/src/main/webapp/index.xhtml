@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui"	
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"	
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 	
-	<h:head>
-		<title>Biblioteca</title>
-		<f:viewParam name="book" value="#{bookEdit.book}" />
-		<f:event listener="#{index.init()}" type="preRenderView" />	 
-		<!-- 
-		-->
-	</h:head>	
-	
-	<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
-		<p:growl id="idMessages" showDetail="true" autoUpdate="true" severity="info" />
-	
-		<h1 align = "center" style="background-color:#767576;">Biblioteca</h1>
-		
-		<p align = "center" style="background-color:#767576;">
+	<ui:composition template="/WEB-INF/templates/__commonLayout.xhtml">
+		<ui:define name="content">
+			<h:head>
+				<title>Biblioteca</title>
+				<f:viewParam name="book" value="#{bookEdit.book}" />
+				<f:event listener="#{index.init()}" type="preRenderView" />	 
+				<!-- 
+				-->
+			</h:head>	
 			
-			<p:button outcome="book_edit.xhtml"       value="Adicionar"                 />
-			<p:button outcome="search.xhtml"          value="Buscar/Editar/Remover"     />
-			<p:button outcome="selecionarItem.xhtml"  value="Selecionar ItemBiblioteca" />		
+			<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
+				<br />
+				<br />
+				
+				<p:growl id="idMessages" showDetail="true" autoUpdate="true" severity="info" />
 			
-		</p>
-		
-		<h:form id="formEdit" style="background-color:#767576;">
-					<h:commandButton action="#{bookEdit.povoar()}" value="Povoar"/>	
-		</h:form>	
-		
-	</h:body>
+				<h1 align = "center" style="background-color:#767576;">Biblioteca</h1>
+				
+				<p align = "center" style="background-color:#767576;">
+					
+					<p:button outcome="book_edit.xhtml"       value="Adicionar"                 />
+					<p:button outcome="search.xhtml"          value="Buscar/Editar/Remover"     />
+					<p:button outcome="selecionarItem.xhtml"  value="Selecionar ItemBiblioteca" />		
+					
+				</p>
+				
+				<h:form id="formEdit" style="background-color:#767576;">
+							<h:commandButton action="#{bookEdit.povoar()}" value="Povoar"/>	
+				</h:form>	
+				
+			</h:body>
+		</ui:define>
+	</ui:composition>
 </html>

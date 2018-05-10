@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"	
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"	
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 	
 	<f:metadata>
@@ -13,64 +14,70 @@
 		 -->		
 	</f:metadata>
 	
-	<h:head>
-		<title>Edição de Livro</title>
-	</h:head>
-	
-	<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
-		<p:growl id="idMessages" showDetail="true" autoUpdate="true" severity="info" />
-		<p:messages id="idMessagesErrors" showDetail="true" closable="true" severity="error" autoUpdate="true" />
-		
-		<h1 align = "center" style="background-color:#767576;">Edição e registro de livros</h1>
-		
-		<div align = "center">
+	<ui:composition template="/WEB-INF/templates/__commonLayout.xhtml">
+		<ui:define name="title">
+			Edição e registro de livros
+		</ui:define>
+		<ui:define name="content">
 						
-			<h:form id="formEdit" style="background-color:#767576;">
-				<h:panelGrid columns="2">				
-					
-					<p:outputLabel for="bookIsbn" value="ISBN: " />
-					<p:inputText id="bookIsbn"  label="isbn" value="#{bookEdit.book.isbn}" required="true"  />
-						
-					
-					<p:outputLabel for="bookName" value="Nome do livro: "  />
-					<p:inputText id="bookName"  label="Nome do Livro" required="true" value="#{bookEdit.book.name}" />
+			<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
+				<br />
+				<br />
+				<p:growl id="idMessages" showDetail="true" autoUpdate="true" severity="info" />
+				<p:messages id="idMessagesErrors" showDetail="true" closable="true" severity="error" autoUpdate="true" />
 				
+				<h1 align = "center" style="background-color:#767576;">Edição e registro de livros</h1>
+				
+				<div align = "center">
+								
+					<h:form id="formEdit" style="background-color:#767576;">
+						<h:panelGrid columns="2">				
+							
+							<p:outputLabel for="bookIsbn" value="ISBN: " />
+							<p:inputText id="bookIsbn"  label="isbn" value="#{bookEdit.book.isbn}" required="true"  />
+								
+							
+							<p:outputLabel for="bookName" value="Nome do livro: "  />
+							<p:inputText id="bookName"  label="Nome do Livro" required="true" value="#{bookEdit.book.name}" />
+						
+							
+							<p:outputLabel for="bookEditora" value="Editora: " />
+							<p:inputText id="bookEditora" label="Editora" value="#{bookEdit.book.edition}" required="true"/>
+							
+							<p:outputLabel for="bookPages" value="Quantidade de paginas: " />
+							<p:inputText id="bookPages" label="QuantiddadeDePaginas" value="#{bookEdit.book.qtdPages}" required="true" />
+							
+							<p:outputLabel for="bookAssunto" value="Assunto: " />
+							<p:inputText id="bookAssunto"  label="Assunto" value="#{bookEdit.book.subject}" required="true"/>
+							
+							<p:outputLabel for="bookDate" value="Data de publicação: " required="true"/>
+							<p:inputText id="bookDate"  label="Data de publicacao" value="#{bookEdit.book.date}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</p:inputText>
+							
+							<p:outputLabel  for="bookDescription" value="Descrição: " />
+							<p:inputTextarea id="bookDescription"  label="Descricao" required="true" rows="5" value="#{bookEdit.book.description}" />
+							
+							<p:outputLabel for="type" value="Tipo de publicação"  />				
+							<p:selectOneMenu id="type"  value="#{bookEdit.book.type}">
+								  <f:selectItem itemLabel="Livro"          itemValue="Livro"/>
+								  <f:selectItem itemLabel="Livro de bolso" itemValue="Livro de bolso"/>
+								  <f:selectItem itemLabel="Capa Dura"      itemValue="Capa dura"/>
+								  <f:selectItem itemLabel="Ebook"          itemValue="Ebook"/>
+								  <f:selectItem itemLabel="Revista"        itemValue="Revista"/>
+								  <f:selectItem itemLabel="Periodico"      itemValue="Periodico"/>
+							</p:selectOneMenu>
+							
+							<p:commandButton type="submit" action="#{bookEdit.saveBook}" value="Salvar" />
+							<p:button outcome="index.xhtml" value="Menu principal" />
+							<!-- 
+							 -->						
 					
-					<p:outputLabel for="bookEditora" value="Editora: " />
-					<p:inputText id="bookEditora" label="Editora" value="#{bookEdit.book.edition}" required="true"/>
-					
-					<p:outputLabel for="bookPages" value="Quantidade de paginas: " />
-					<p:inputText id="bookPages" label="QuantiddadeDePaginas" value="#{bookEdit.book.qtdPages}" required="true" />
-					
-					<p:outputLabel for="bookAssunto" value="Assunto: " />
-					<p:inputText id="bookAssunto"  label="Assunto" value="#{bookEdit.book.subject}" required="true"/>
-					
-					<p:outputLabel for="bookDate" value="Data de publicação: " required="true"/>
-					<p:inputText id="bookDate"  label="Data de publicacao" value="#{bookEdit.book.date}">
-						<f:convertDateTime pattern="dd/MM/yyyy" />
-					</p:inputText>
-					
-					<p:outputLabel  for="bookDescription" value="Descrição: " />
-					<p:inputTextarea id="bookDescription"  label="Descricao" required="true" rows="5" value="#{bookEdit.book.description}" />
-					
-					<p:outputLabel for="type" value="Tipo de publicação"  />				
-					<p:selectOneMenu id="type"  value="#{bookEdit.book.type}">
-						  <f:selectItem itemLabel="Livro"          itemValue="Livro"/>
-						  <f:selectItem itemLabel="Livro de bolso" itemValue="Livro de bolso"/>
-						  <f:selectItem itemLabel="Capa Dura"      itemValue="Capa dura"/>
-						  <f:selectItem itemLabel="Ebook"          itemValue="Ebook"/>
-						  <f:selectItem itemLabel="Revista"        itemValue="Revista"/>
-						  <f:selectItem itemLabel="Periodico"      itemValue="Periodico"/>
-					</p:selectOneMenu>
-					
-					<p:commandButton type="submit" action="#{bookEdit.saveBook}" value="Salvar" />
-					<p:button outcome="index.xhtml" value="Menu principal" />
-					<!-- 
-					 -->						
-			
-				</h:panelGrid>
-			</h:form>
-		</div>
-		
-	</h:body>
+						</h:panelGrid>
+					</h:form>
+				</div>
+				
+			</h:body>
+		</ui:define>
+	</ui:composition>
 </html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"	
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<ui:composition template="/WEB-INF/templates/__commonLayout.xhtml">
+		<ui:define name="content">
+			<h:head>
+				<title>Informes</title>
+				
+				<!-- 
+				-->
+			</h:head>	
+			
+			<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
+				<br />
+				<br />
+				
+				<p:growl id="idMessages" showDetail="true" autoUpdate="true" severity="info" />
+			
+				<h1 align = "center" style="background-color:#767576;">Informes</h1>
+				
+				
+				<p>
+					<h3 align = "center" style="background-color:#767576;">
+						Observações gerais sobre a atividade!<br />
+						
+						
+					</h3 >
+					<p align = "center" style="background-color:#767576;" >
+						* Os elementos de menus sempre ficam visiveis em todas as telas, foi decidido por mim, 
+						até então, não implementar o beans que altera a visibilidade, julgo uma coisa simples
+						e optei por não usar.
+						<br />
+						* O menu e o rodapé forma adicionados por exigencias da atividade, na tela inicial (index), 
+						não se fazia necessario, mas optei por deixar lá tambem.
+						<br />
+						
+						
+						<br />
+						<br />
+						<p:button outcome="index.xhtml"       value="Voltar a tela inicial"  align = "center" />
+					</p>
+					
+				</p>
+				
+			</h:body>
+		</ui:define>
+	</ui:composition>
+</html>
