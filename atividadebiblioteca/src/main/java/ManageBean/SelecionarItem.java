@@ -2,6 +2,7 @@ package ManageBean;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -20,7 +21,6 @@ public class SelecionarItem extends AbstractBean {
 	private BookFilter bookFilter;
 	private static final long serialVersionUID = -5976838804313515033L;	
 
-	
 	
 
 	

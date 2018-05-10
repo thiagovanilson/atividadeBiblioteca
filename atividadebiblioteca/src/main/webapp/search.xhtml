@@ -13,6 +13,9 @@
 		<ui:define name="content">
 			<h:head>
 				<title>Lista de livros</title>
+				
+				<f:event listener="#{index.setMenuVisibility(true)}" type="preRenderView" />	 
+				
 			</h:head>
 			
 			
@@ -67,10 +70,10 @@
 							</p:selectOneMenu>
 							
 							<h:panelGrid columns="2">
-								<p:commandButton id="btnFiltrarBotao" value="Buscar" action="#{index.filtrar()}" update=":dataTableLivros"/>
-								<p:commandButton id="btnLimparBotao" value="Limpar" action="#{index.limpar()}" update="@all"/>
+								<p:commandButton id="btnFiltrarBotao" value="Buscar" action="#{index.filtrar()}" update=":dataTableLivros" icon="fa fa-search"/>
+								<p:commandButton id="btnLimparBotao"  value="Limpar" action="#{index.limpar()}"  update="@all"			   icon="fa fa-rotate-left"/>
 							</h:panelGrid>
-							<p:commandButton id="btnMenuBotao" value="Menu" action="index.xhtml" />
+							<p:commandButton id="btnMenuBotao" value="Menu" action="index.xhtml" icon="fa fa-home" />
 							
 						</p:panelGrid>
 					</h:form>
@@ -123,7 +126,7 @@
 									<p:confirm header="Confirmação!" message="Continuar com a remoção do livro '#{book.title}' ?" icon="ui-icon-alert" />
 								</p:commandButton>		
 										
-								<p:button outcome="book_edit.xhtml" value="Editar">
+								<p:button outcome="book_edit.xhtml" value="Editar" icon="fa fa-edit">
 									<f:param name="book" value="#{book.isbn}" />
 								</p:button>
 								

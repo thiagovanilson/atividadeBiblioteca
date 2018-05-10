@@ -11,6 +11,7 @@
 				<title>Biblioteca</title>
 				<f:viewParam name="book" value="#{bookEdit.book}" />
 				<f:event listener="#{index.init()}" type="preRenderView" />	 
+				<f:event listener="#{index.setMenuVisibility(false)}" type="preRenderView" />	 
 				<!-- 
 				-->
 			</h:head>	
@@ -23,18 +24,13 @@
 			
 				<h1 align = "center" style="background-color:#767576;">Biblioteca</h1>
 				
-				<p align = "center" style="background-color:#767576;">
+				<p  align = "center" style="background-color:#767576;">
 					
-					<p:button outcome="book_edit.xhtml"       value="Adicionar"                 />
-					<p:button outcome="search.xhtml"          value="Buscar/Editar/Remover"     />
-					<p:button outcome="selecionarItem.xhtml"  value="Selecionar ItemBiblioteca" />		
+					<p:button outcome="book_edit.xhtml"       value="Adicionar"                 icon="fa fa-plus"    />
+					<p:button outcome="search.xhtml"          value="Buscar/Editar/Remover"     icon="fa fa-navicon" />
+					<p:button outcome="selecionarItem.xhtml"  value="Selecionar ItemBiblioteca" icon="fa fa-book"    />		
 					
-				</p>
-				
-				<h:form id="formEdit" style="background-color:#767576;">
-							<h:commandButton action="#{bookEdit.povoar()}" value="Povoar"/>	
-				</h:form>	
-				
+				</p>				
 			</h:body>
 		</ui:define>
 	</ui:composition>

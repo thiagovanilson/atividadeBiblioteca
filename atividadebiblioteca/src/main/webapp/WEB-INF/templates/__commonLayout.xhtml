@@ -20,11 +20,13 @@
 			<h:form id="formMenu">
 				<p:menubar>
 					<p:submenu id="submenuActions" label="Menu" icon="fa fa-fw fa-gear">
-						<p:menuitem id="submenuActionsItemHome"    value=" Pagina inicial" url="index.xhtml" icon="fa fa-fw fa-home" rendered="#{!notRenderHomeLinkMenu}" />
-						<p:menuitem id="submenuActionsItemAddUser" value=" Adicionar item" url="book_edit.xhtml" icon="fa fa-book" />
-						<p:menuitem id="submenuActionsSearch"      value=" Buscar item"    url="search.xhtml" icon="fa fa-search" />
-						<p:menuitem id="submenuActionsInfo"        value=" Info"           url="informations.xhtml" icon="fa fa-info-circle" />
 						
+						<p:menuitem id="submenuActionsItemHome"    			value=" Pagina inicial" url="index.xhtml"             icon="fa fa-fw fa-home" rendered="#{index.IsVisible()}" />
+						<p:menuitem id="submenuActionsItemAddUser" 			value=" Adicionar item" url="book_edit.xhtml"         icon="fa fa-book" />
+						<p:menuitem id="submenuActionsSearch"      			value=" Buscar item"    url="search.xhtml"            icon="fa fa-search" />
+						<p:menuitem id="populate"                           value=" Povoar "        action="#{bookEdit.povoar()}" icon="fa fa-users" />
+						<p:menuitem id="submenuActionsInfo"        			value=" Info"           url="informations.xhtml"      icon="fa fa-info-circle" />
+											
 					</p:submenu>
 				</p:menubar>
 			</h:form>

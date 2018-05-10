@@ -20,6 +20,8 @@
 			</f:metadata>
 			<h:head>
 				<title>Biblioteca - Selecionar Item</title>
+				<f:event listener="#{index.setMenuVisibility(true)}" type="preRenderView" />	 
+				
 				<!-- 
 				<f:viewParam name="book" value="#{bookEdit.book}" />
 				<f:event listener="#{index.init()}" type="preRenderView" />	 
@@ -42,8 +44,8 @@
 							</p:selectOneMenu>
 							
 						</p>
-							<p:button outcome="index.xhtml" value="Menu principal" />
-							<p:commandButton   value="Ok" type="submit" update=":mes"/>
+							<p:button outcome="index.xhtml" value="Menu principal"    icon="fa fa-home"/>
+							<p:commandButton   value="Ok" type="submit" update=":mes" icon="fa fa-search"/>
 					</h:form>
 				</div>
 				

@@ -19,7 +19,10 @@
 			Edição e registro de livros
 		</ui:define>
 		<ui:define name="content">
-						
+			<h:head>
+				<f:event listener="#{index.setMenuVisibility(true)}" type="preRenderView" />	 
+				
+			</h:head>		
 			<h:body style="background: url('img/back.jpg'); background-color:#767576; ">
 				<br />
 				<br />
@@ -34,7 +37,7 @@
 						<h:panelGrid columns="2">				
 							
 							<p:outputLabel for="bookIsbn" value="ISBN: " />
-							<p:inputText id="bookIsbn"  label="isbn" value="#{bookEdit.book.isbn}" required="true"  />
+							<p:inputText id="bookIsbn"  label="isbn" value="#{bookEdit.book.isbn}" required="true"  validator="isbnValidator" />
 								
 							
 							<p:outputLabel for="bookName" value="Nome do livro: "  />
@@ -68,8 +71,8 @@
 								  <f:selectItem itemLabel="Periodico"      itemValue="Periodico"/>
 							</p:selectOneMenu>
 							
-							<p:commandButton type="submit" action="#{bookEdit.saveBook}" value="Salvar" />
-							<p:button outcome="index.xhtml" value="Menu principal" />
+							<p:commandButton type="submit" action="#{bookEdit.saveBook}" value="Salvar"         icon="fa fa-save" />
+							<p:button outcome="index.xhtml"								 value="Menu principal" icon="fa fa-home" />
 							<!-- 
 							 -->						
 					

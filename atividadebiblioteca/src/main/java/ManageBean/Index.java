@@ -32,7 +32,7 @@ public class Index extends AbstractBean {
 	public void init() {
 		filtrar();
 		limpar();
-		//povoar();
+		
 	}
 	public String description() {
 		for(Book b: books) {
@@ -79,5 +79,12 @@ public class Index extends AbstractBean {
 	public void setBook(String book) {
 		this.book = book;
 	}
+	private static boolean menuVisibility = false;
 	
+	public boolean IsVisible() {
+		return menuVisibility;
+	}
+	public static void setMenuVisibility(boolean flag) {
+		menuVisibility = flag;
+	}
 }

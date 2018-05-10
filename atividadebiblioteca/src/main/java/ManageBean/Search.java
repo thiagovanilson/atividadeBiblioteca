@@ -1,5 +1,6 @@
 package ManageBean;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
 import exceptions.ServiceDacException;
 import services.BookService;
@@ -10,8 +11,10 @@ import services.BookService;
 @ManagedBean
 public class Search extends AbstractBean {
 
-	
-	
+	@PostConstruct
+	public void atualizar() {
+		Index.setMenuVisibility(true);
+	}
 	public String deleteBook(Book b) {
 		try {
 			new BookService().delete(b);
