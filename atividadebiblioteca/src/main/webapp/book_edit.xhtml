@@ -38,12 +38,10 @@
 							
 							<p:outputLabel for="bookIsbn" value="ISBN: " />
 							<p:inputText id="bookIsbn"  label="isbn" value="#{bookEdit.book.isbn}" required="true"  validator="isbnValidator" />
-								
-							
+														
 							<p:outputLabel for="bookName" value="Nome do livro: "  />
 							<p:inputText id="bookName"  label="Nome do Livro" required="true" value="#{bookEdit.book.name}" />
-						
-							
+													
 							<p:outputLabel for="bookEditora" value="Editora: " />
 							<p:inputText id="bookEditora" label="Editora" value="#{bookEdit.book.edition}" required="true"/>
 							
@@ -63,18 +61,18 @@
 							
 							<p:outputLabel for="type" value="Tipo de publicação"  />				
 							<p:selectOneMenu id="type"  value="#{bookEdit.book.type}">
-								  <f:selectItem itemLabel="Livro"          itemValue="Livro"/>
+								  <f:selectItem itemLabel="Livro"          itemValue="Livro"         />
 								  <f:selectItem itemLabel="Livro de bolso" itemValue="Livro de bolso"/>
-								  <f:selectItem itemLabel="Capa Dura"      itemValue="Capa dura"/>
-								  <f:selectItem itemLabel="Ebook"          itemValue="Ebook"/>
-								  <f:selectItem itemLabel="Revista"        itemValue="Revista"/>
-								  <f:selectItem itemLabel="Periodico"      itemValue="Periodico"/>
+								  <f:selectItem itemLabel="Capa Dura"      itemValue="Capa dura"     />
+								  <f:selectItem itemLabel="Ebook"          itemValue="Ebook"         />
+								  <f:selectItem itemLabel="Revista"        itemValue="Revista"       />
+								  <f:selectItem itemLabel="Periodico"      itemValue="Periodico"     />
 							</p:selectOneMenu>
 							
 							<p:commandButton type="submit" action="#{bookEdit.saveBook}" value="Salvar"         icon="fa fa-save" update=":formEdit"/>
 							<p:button outcome="index.xhtml"								 value="Menu principal" icon="fa fa-home" />
 							<!-- 
-							 -->						
+							 -->			
 					
 						</h:panelGrid>
 					</h:form>

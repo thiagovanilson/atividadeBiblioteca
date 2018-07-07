@@ -14,7 +14,7 @@
 	
 		<ui:define name="content">
 			<f:metadata>
-				 <f:event listener="#{bookEdit.init()}" type="preRenderView" />
+<!-- 				 <f:event listener="#{bookEdit.init()}" type="preRenderView" /> -->
 				 <f:viewParam name="book" value="#{bookEdit.book}" />
 			
 			</f:metadata>
@@ -39,8 +39,8 @@
 					
 					<h:form id="formFiltro" >
 						<p align = "center" style="background-color:#767576;">
-							<p:selectOneMenu  id = "name" value="#{index.book}">
-								<f:selectItems  value="#{index.books}" var="g" itemLabel="#{g.name}" itemValue="#{g.name}" />						
+							<p:selectOneMenu  id = "name" value="#{selecionarItem.book}">
+								<f:selectItems  value="#{selecionarItem.books}" var="g" itemLabel="#{g.name}" itemValue="#{g}" />						
 							</p:selectOneMenu>
 							
 						</p>
@@ -52,7 +52,7 @@
 				<br />
 				
 				<p  align = "center" style="background-color:#767576;">
-					<p:outputLabel id="mes" value="#{index.description()}"  /> 
+					<p:outputLabel id="mes" value="#{selecionarItem.description()}"  /> 
 				</p>
 				
 			</h:body>

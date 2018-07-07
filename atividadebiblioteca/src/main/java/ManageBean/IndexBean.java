@@ -1,11 +1,12 @@
 package ManageBean;
 
-import java.util.Date;
+
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.*;
-import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import exceptions.ServiceDacException;
 import services.BookFilter;
@@ -13,19 +14,20 @@ import services.BookService;
 
 
 
-@RequestScoped
-@ManagedBean
-public class Index extends AbstractBean {
+@ViewScoped
+@Named("index")
+public class IndexBean extends AbstractBean {
 
-	private List<Book> books;
-	private BookService bookService = new BookService();
+	@Inject
+	private BookService bookService;
 	private BookFilter bookFilter;
+	private List<Book> books;
 	
 	private static final long serialVersionUID = -5976838804313515033L;	
 	private String book;
 	
 	
-	public Index getInstance() {
+	public IndexBean getInstance() {
 		return this;
 	}
 	@PostConstruct
@@ -52,20 +54,6 @@ public class Index extends AbstractBean {
 		}
 		return null;
 	}
-
-	public String limpar() {
-		this.bookFilter = new BookFilter();
-		return null;
-	}
-
-	public List<Book> getBooks() {
-		return books;
-	}
-
-	public void setBooks(List<Book> books) {
-		this.books = books;
-	}
-
 	public BookFilter getBookFilter() {
 		return bookFilter;
 	}
@@ -73,7 +61,24 @@ public class Index extends AbstractBean {
 	public void setBookFilter(BookFilter bookFilter) {
 		this.bookFilter = bookFilter;
 	}
+	public String limpar() {
+		this.bookFilter = new BookFilter();
+		return null;
+	}
+
+	public List<Book> getBooks() {
+		
+		filtrar();
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
+	
 	public String getBook() {
+		
 		return book;
 	}
 	public void setBook(String book) {

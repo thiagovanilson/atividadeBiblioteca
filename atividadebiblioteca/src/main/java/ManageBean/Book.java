@@ -1,19 +1,28 @@
 package ManageBean;
 import java.util.Date;
 
+import javax.persistence.*;
+
+@Entity
 public class Book {
 
 	private String
 		title,
-		edition,
-		type,
+		edition,	
 		subject,
-		isbn,
 		description;
+	@Id
+	private String isbn;
+	
+	@Column(name="tipo")
+	private String type;
 	
 	private String[] types = new String[] {"Livro","Livro de bolso","Capa dura", 
 			"Ebook","Revista","Periodico"};
+	
+	
 	private int qtdPages=1;
+	@Column (name="data")
 	private Date date = new Date();
 	
 	Book(){
@@ -103,7 +112,5 @@ public class Book {
 		} else if (!isbn.equals(other.isbn))
 			return false;
 		return true;
-	}
-	
-	
+	}	
 }

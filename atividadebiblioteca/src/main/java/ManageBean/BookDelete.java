@@ -1,14 +1,14 @@
 package ManageBean;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import exceptions.ServiceDacException;
 import services.BookService;
 
 
 @ViewScoped
-@ManagedBean
+@Named
 public class BookDelete extends AbstractBean {
 	
 

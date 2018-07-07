@@ -1,105 +1,104 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import ManageBean.Book;
 import exceptions.PersistenciaDacException;
 
-public class BookDAO {
+public class BookDAO extends Persist{
 
-	private static Map<String, Book> REPOSITORY = new ConcurrentHashMap<String, Book>(new HashMap<String, Book>());
 
-	public void save(Book book) throws PersistenciaDacException {
-		
-		REPOSITORY.put(book.getIsbn(),book);
-	}
-
+	private List<Book> books;
+	
 	public void update(Book book) throws PersistenciaDacException {
-		REPOSITORY.put(book.getIsbn(), book);
+		edit(book);
 	}
-
-	public void delete(Book book) throws PersistenciaDacException {
-		REPOSITORY.remove(book.getIsbn());
-	}
-
+	
 	public Book getByID(String isbn) throws PersistenciaDacException {
-		return REPOSITORY.get(isbn);
+		return getBook(isbn);
 	}
 
 	public List<Book> getAll() throws PersistenciaDacException {
-		return new ArrayList<Book>(REPOSITORY.values());
+		books = getBooks();
+		return books;//new ArrayList<Book>(REPOSITORY.values());
 	}
 
 	public List<Book> findBy(BookFilter filter) throws PersistenciaDacException {
 
 		if (filter == null || filter.isEmpty()) {
-			return new ArrayList<Book>(REPOSITORY.values());
+			getAll();
+			return books;
 		}
 
-		List<Book> resultado = new ArrayList<Book>();
+		String sql = "SELECT b FROM Book b Where 1 = 1 ";
 
-		for (Book book : REPOSITORY.values()) {
-			if (notEmpty(filter.getIsbn())) {
-				if (equals(book.getIsbn(), filter.getIsbn())) {
-					resultado.add(book);
-					return resultado;
-				}
-				else
-					continue;
-			}
-			
-			// Name
-			if (notEmpty(filter.getName())) {
-				if (!contains(book.getName(), filter.getName())) {
-					continue;
-				}
-			}
-
-			if (notEmpty(filter.getEdition())) {
-				if (!contains(book.getEdition(),filter.getEdition() )) {
-					continue;
-				}
-			}
-			if (notEmpty(filter.getType())) {
-				if (!equals(book.getType(),filter.getType() )) {
-					continue;
-				}
-			}
-			if (notEmpty(filter.getUpPages() )&& (filter.getUpPages() > 0)) {
-				if (!(filter.getUpPages() <= book.getQtdPages() ) ) {
-					//System.out.println("N�o encontrou a editora");
-					continue;
-				}
-			}
-			if (notEmpty(filter.getDownPages())&& (filter.getDownPages() > 0)) {
-				if (!(filter.getDownPages() >= book.getQtdPages() ) ) {
-					//System.out.println("N�o encontrou a editora");
-					continue;
-				}
-			}
-			// Date begin
-			if (notEmpty(filter.getRangeBegin())) {
-				if (!assertDate(book.getDate(), filter.getRangeBegin(), true)) {
-					continue;
-				}
-			}
-
-			// Date end
-			if (notEmpty(filter.getRangeEnd())) {
-				if (!assertDate(book.getDate(), filter.getRangeEnd(), false)) {
-					continue;
-				}
-			}
-
-			resultado.add(book);
+		if (notEmpty(filter.getName())) {
+			sql += " AND b.title Like :Title";
+		}
+		
+		if (notEmpty(filter.getType())) {
+			sql += " AND b.type LIKE :Type ";
 		}
 
-		return resultado;
+		
+		if (notEmpty(filter.getDownPages()) && filter.getDownPages() > 0) {
+			sql += " AND b.qtdPages <= :RangeBegin ";
+		}
+
+		if (notEmpty(filter.getUpPages()) && filter.getUpPages() > 0) {
+			sql += " AND b.qtdPages >= :RangeEnd ";
+		}
+		
+		if (notEmpty(filter.getRangeBegin()) ) {
+			sql += " AND b.date >= :DateBegin ";
+		}
+		
+		if (notEmpty(filter.getRangeEnd()) ) {
+			sql += " AND b.date <= :DateEnd ";
+		}
+		
+		if (notEmpty(filter.getEdition()) ) {
+			sql += " AND b.edition like :Edition ";
+		}
+
+		EntityManager em = getEntityManager();
+		TypedQuery<Book> query = em.createQuery(sql, Book.class);
+		
+		if (notEmpty(filter.getName())) {
+			query.setParameter("Title", "%" + filter.getName() + "%");
+		}
+
+		if (notEmpty(filter.getType())) {
+			query.setParameter("Type", "" + filter.getType());
+		}
+
+	 
+		if (notEmpty(filter.getDownPages()) && filter.getDownPages() > 0) {
+
+			query.setParameter("RangeBegin", filter.getDownPages());
+		}
+
+		if (notEmpty(filter.getUpPages()) && filter.getUpPages() > 0) {
+			query.setParameter("RangeEnd", filter.getUpPages());
+		}
+
+		if (notEmpty(filter.getRangeBegin()) ) {
+			query.setParameter("DateBegin", filter.getRangeBegin());
+		}	
+		
+		if (notEmpty(filter.getRangeEnd()) ) {
+			query.setParameter("DateEnd", filter.getRangeEnd());
+		}	
+		
+		if (notEmpty(filter.getEdition()) ) {
+			query.setParameter("Edition", filter.getEdition());
+		}
+		return query.getResultList();
 
 	}
 

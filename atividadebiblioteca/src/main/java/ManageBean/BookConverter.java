@@ -6,6 +6,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 import exceptions.ServiceDacException;
 import services.BookService;
@@ -13,7 +14,8 @@ import services.BookService;
 @FacesConverter(forClass = Book.class)
 public class BookConverter implements Converter {
 
-	private BookService book = new BookService();
+	@Inject
+	private BookService book;
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {

@@ -5,7 +5,12 @@ import java.io.Serializable;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+
 import ManageBean.Book;
+import br.edu.ifpb.mt.dac.util.TransacionalCdi;
 import exceptions.*;
 
 
@@ -17,19 +22,20 @@ public class BookService implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7803325791425670859L;
-	
-	private BookDAO bookDAO = new BookDAO();
+	@Inject
+	private BookDAO bookDAO;
 	
 	public void save(Book book) throws ServiceDacException {
 		try {
-			// Verificar se login já existe
-			//validarLogin(book);
-			bookDAO.save(book);
-		} catch (PersistenciaDacException e) {
+			Book b = bookDAO.getByID(book.getIsbn());
+			if(b == null)
+				bookDAO.save(book);
+			else
+				bookDAO.edit(book);
+		} catch (Exception e) {
 			throw new ServiceDacException(e.getMessage(), e);
 		}
 	}
-
 	public void update(Book book) throws ServiceDacException {
 		
 		try {
@@ -39,11 +45,12 @@ public class BookService implements Serializable {
 			throw new ServiceDacException(e.getMessage(), e);
 		}
 	}
-
+	
 	public void delete(Book book) throws ServiceDacException {
+
 		try {
 			bookDAO.delete(book);
-		} catch (PersistenciaDacException e) {
+		} catch (Exception e) {
 			throw new ServiceDacException(e.getMessage(), e);
 		}
 	}
